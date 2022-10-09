@@ -1,0 +1,34 @@
+python -m pip  install fpdf
+python -m pip install pillow
+python -m pip install pandas
+python -m pip install pypyodbc
+
+python -m venv env 
+
+.\env\Scripts\activate
+	
+install pandas
+install fpdf
+ install pillow
+install djangorestframework
+
+python.exe -m pip install --upgrade pip
+ install django
+ 
+ install pygments
+ install pdfkit
+pip install --upgrade pyodbc
+ install pypyodbc
+ 
+ 
+
+
+Django framework
+Módulo de fpdf
+Módulo pandas
+Módulo pillow
+
+
+ <li class="nav-item">         
+          <font size=5> <a class="nav-link" href="Servicios"><strong>Servicios</strong></a></font>
+        </li>
