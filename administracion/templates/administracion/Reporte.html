@@ -1,0 +1,95 @@
+{% extends 'main.html' %}
+{% load static %}
+
+
+
+{% block content %}
+
+<div class="reporte">
+
+<div>
+  <a href="{% static 'coopresol.mdb' %}" class="btn btn-primary btn-lg" id="descargar">Descargar</a>
+
+
+
+<div class="tabla">
+
+    <table class="table table-striped">
+      <tr>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Cedula</th>
+        <th>Dirección</th>
+        <th>Email</th>
+        <th>Teléfono</th>
+        <th>Celular</th>
+        <th>Patrocinador</th>
+        <th>Lugar Nacimiento</th>
+        <th>Edad</th>
+        <th>Hijos</th>
+        <th>Hijas</th>
+        <th>Estado Civil</th>
+        <th>Lugar Trabajo</th>
+        <th>Teléfono Trabajo</th>
+        <th>Dirección Trabajo</th>
+      </tr>
+      <tr>
+        {% for solicitud in SolicitudesF %}
+        <td>{{solicitud.Nombre}}</td>
+        <td>{{solicitud.Apellido}}</td>
+        <td>{{solicitud.Cedula}}</td>
+        <td>{{solicitud.Direccion}}</td>
+        <td>{{solicitud.email}}</td>
+        <td>{{solicitud.Telefono}}</td>
+        <td>{{solicitud.Celular}}</td>
+        <td>{{solicitud.Patrocinador}}</td>
+        <td>{{solicitud.LugarNacimiento}}</td>
+        <td>{{solicitud.edad}}</td>
+        <td>{{solicitud.Hijos}}</td>
+        <td>{{solicitud.hijas}}</td>
+        <td>{{solicitud.EstadoCivil}}</td>
+        <td>{{solicitud.LugarTrabajo}}</td>
+        <td>{{solicitud.TelTrabajo}}</td>
+        <td>{{solicitud.DireccionTrabajo}}</td>
+      </tr>
+      {% endfor %}
+    </table>
+
+</div>
+
+<div class="tabla">
+     <table class="table table-striped">
+       <tr>
+         <th>Nombre Institución</th>
+         <th>RNC</th>
+         <th>Dirección</th>
+         <th>Email</th>
+         <th>Teléfono</th>
+         <th>Celular</th>
+         <th>Sitio WEB</th>
+         <th>PagoRealizado</th>
+         <th>Estado</th>
+       </tr>
+       <tr>
+         {% for solicitud in SolicitudesJ %}
+         <td>{{solicitud.NombreINS}}</td>
+         <td>{{solicitud.RNC}}</td>
+         <td>{{solicitud.Direccion}}</td>
+         <td>{{solicitud.email}}</td>
+         <td>{{solicitud.Telefono}}</td>
+         <td>{{solicitud.Celular}}</td>
+         <td>{{solicitud.WebSite}}</td>
+         <td>{{solicitud.PagoRealizado}}</td>
+         <td>{{solicitud.Estado}}</td>
+       </tr>
+       {% endfor %}
+     </table>
+ 
+ </div>
+
+
+
+</div>
+</div>
+
+{% endblock content %}

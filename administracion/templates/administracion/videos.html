@@ -1,0 +1,75 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+
+<div  class="formVideos">
+
+    
+<form action="" method="post" enctype="application/x-www-form-urlencoded" >
+    {% csrf_token%}
+
+    {% for field in formulario %}     
+    <div class="mb-3">
+        <label for="formFile" class="form-label">{{field.label}}</label>
+        {{field}}
+    </div>
+
+    {% endfor %}
+
+    <button type="submit" class="btn btn-success">Enviar</button>
+</form>
+
+<form action="" method="post" enctype="application/x-www-form-urlencoded" class="formCategoria">
+    {% csrf_token%}
+    <h2 style="margin:auto; width:50%"> Agregar Categoría</h2>
+    {% for field in formuCategoria %}     
+    <div class="mb-3">
+        <label for="formFile" class="form-label">{{field.label}}</label>
+        {{field}}
+    </div>
+
+    {% endfor %}
+
+    <button type="submit" class="btn btn-success">Enviar</button>
+</form>
+
+
+
+
+
+{% for categorias in categoria %}
+
+<div class="categoria">
+
+    <h3> {{categorias.Categoria}} -- <a href="{% url 'EliminarCategoria' categorias.id %}" class="btn btn-danger">Eliminar</a></h3>
+    
+    {% for links in videos %}
+
+        {% if links.Categoria == categorias %}
+
+              {% autoescape off %}
+
+              <div class="card" id="aulaAdminvideos">
+                
+                <div class="card-body">
+                    {{ links.VideoURL }}
+                    
+                </div>
+                <a href="{% url 'EliminarVideo' links.id %}" class="btn btn-danger">Eliminar</a>
+              </div>
+              
+              
+              {% endautoescape %}
+              
+        {% endif %}
+    {% endfor %}
+
+</div>
+
+{% endfor %}
+</div>
+
+
+
+{% endblock content %}

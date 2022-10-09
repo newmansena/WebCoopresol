@@ -1,0 +1,51 @@
+{% extends 'main.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="contenedorvistaProyetos" >
+
+    <div class="row g-0 bg-light position-relative">
+     <div class="solicitudnombre">
+      <form action="" method="post" enctype="multipart/form-data" class="formdetallesolicitud">
+        {% csrf_token%}
+        <div id="detallesSolicitudesAdministracion">
+          {% for field in formusol %} 
+          {% if field.name != 'solicitud' %}  
+          <blockquote class="blockquote mb-0">
+            <label for="formFile" class="form-label">{{field.label}}</label>
+            {{field}}
+          </blockquote> 
+          
+          {% endif %} 
+       
+       
+    
+        {% endfor %}
+        </div>
+        
+    
+        <button type="submit" class="btn btn-success" id="solicitudGuardarBTN">Guardar</button>
+       
+    </form>
+     </div>
+       
+     
+      </div>
+    
+      <!-- thumbnail image wrapped in a link -->
+    
+      <!-- lightbox container hidden with CSS -->
+      
+      </div>
+
+      <script>
+        window.onload = function() {
+                    
+                    document.getElementById("formFile").style.display = "none";
+                  
+                };
+      </script>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,112 @@
+{% extends 'main.html' %}
+{% load static %}
+
+
+
+{% block content %}
+<div class="administracion"> 
+
+
+  <div class="listaSolicitud">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+      <button type="button" class="btn btn-primary" onclick="myFunction()">Persona Física</button>
+      <button type="button" class="btn btn-primary" onclick="myFunctionJuridica()">Persona Jurídica</button>
+    </div>
+    <br>
+    <div id="persona">
+    {% for conta in contactos %}
+       
+            <div class="accordion" id="accordionExample">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <strong>- {{conta.Nombre}} {{conta.Apellido}}-- </strong> 
+                  </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                   Cedula: <strong>{{conta.Cedula}} 
+                     <br>
+                   </strong> Correo Electrónico:<strong>{{conta.email}}</strong>
+                   <br>
+                   <a href="{% url 'EliminarFisica'  conta.id  %}" class="btn btn-danger">Eliminar</a>
+                   <a href="{% url 'Solicitud' 'persona' conta.id  %}" class="btn btn-light">Detalles</a>
+                   <a href="{{conta.solicitud.url}}" class="btn btn-secondary"> {{conta.Nombre}} {{conta.Apellido}}.pdf</a>
+                </div>
+                </div>
+              </div>
+              </div>
+         
+    {% endfor %}
+  </div>
+  <div id="juridica">
+    {% for conta in solicitudJuridica %}
+        
+            <div class="accordion" id="accordionExample">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <strong>- {{conta.NombreINS}} -- </strong> 
+                  </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                   RNC: <strong>{{conta.RNC}} 
+                     <br>
+                   </strong> Correo Electrónico:<strong>{{conta.email}}</strong>
+                   <br>
+                   <a href="{% url 'EliminarJuridica'  conta.id  %}" class="btn btn-danger">Eliminar</a>
+                   <a href="{% url 'Solicitud'  'Juridica' conta.id  %}" class="btn btn-light">Detalles</a>
+                   <a href="{{conta.solicitud.url}}" class="btn btn-secondary"> {{conta.NombreINS}}.pdf</a>
+                </div>
+                </div>
+              </div>
+              </div>
+         
+    {% endfor %}
+  </div>
+  </div>
+
+
+  <div  class="pdfmarco">
+    <form method="GET" action="{% url 'administracion' %}"  class="d-flex">
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="q">
+      <button class="btn btn-outline-success" type="submit">Buscar</button>
+    </form>
+    <br>
+    
+    {% if contactos.count == 1  %}
+    {% for conta in contactos %}
+    <embed src="{{conta.solicitud.url}}" type=""  width="800" height="800">
+    {% endfor%}
+    {% endif %}
+    
+    {% if solicitudJuridica.count == 1  %}
+    {% for conta in solicitudJuridica %}
+    <embed src="{{conta.solicitud.url}}" type=""  width="800" height="800">
+    {% endfor%}
+    {% endif %}
+  </div>
+</div>
+
+
+
+vz<script>
+  function myFunction() {
+    var fisico = document.getElementById("persona");
+    var Juridica = document.getElementById("juridica");
+    fisico.style.display = "block";
+    Juridica.style.display = "none";
+   
+  }
+  function myFunctionJuridica() {
+    var fisico = document.getElementById("persona");
+    var Juridica = document.getElementById("juridica");
+    
+    fisico.style.display = "none";
+    Juridica.style.display = "block";
+
+   
+  }
+  </script>
+{% endblock content %}

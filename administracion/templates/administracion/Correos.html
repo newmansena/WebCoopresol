@@ -1,0 +1,35 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+<div class="contenedorCorreo">
+
+<div class="pendiente">
+{% for correos in Correo %}
+{%  if correos.Estado == 'Pendiente'%}
+
+    <div class="alert alert-info" role="alert">
+        - {{correos.Nombre}} {{correos.Apellido}}--  <a href="{% url 'Leer' correos.id  %}" class="alert-link">Revisar</a> {{correos.Asunto}}
+    </div>
+    
+{% endif %}
+{% endfor %}
+
+</div>
+
+
+  <div class="correos">
+      {% for correos in Correo %}
+      {%  if correos.Estado == 'Revisado'%}
+      <div class="alert alert-success" role="alert" id="correo">
+        - {{correos.Nombre}} {{correos.Apellido}}-- <a href="{% url 'Leer' correos.id  %}" class="alert-link">Leer.</a> - {{correos.Asunto}}-- {{correos.Telefono}}
+      </div>
+      
+ 
+    {% endif %}
+    {% endfor %}
+  </div>
+
+</div>
+
+{% endblock content %}

@@ -1,0 +1,105 @@
+{% extends 'main.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="contenedorvistaProyetos" >
+
+    <div class="row g-0 bg-light position-relative">
+        <div class="col-md-6 mb-md-0 p-md-4">
+          <img src="{{proyectos.Portada.url}}" class="w-100" alt="...">
+        </div>
+        <div class="col-md-6 p-4 ps-md-0" >
+          <h5 class="mt-0">{{proyectos.Titulo}}</h5>
+          <p>{{proyectos.descripcion}}</p>
+          <h2>Impacto</h2>
+          <strong>Económico: </strong><span>{{proyectos.ImpactoEconomico}}</span>
+          <br>
+          <strong> Social: </strong><span>{{proyectos.ImpactoSocial}}</span>
+          <br>
+          <strong>Medio Ambiente: </strong><span>{{proyectos.IMpactoMedioAmbiental}}</span>
+          <br>
+          <h2>Inversión</h2>
+          <strong>Capital: </strong><span>{{proyectos.CapitalInvertido}}</span>
+          <strong>Tiempo: </strong><span>{{proyectos.TiempoEjecucion}}</span>
+          <strong>Duración: </strong><span>{{proyectos.Duracion}}</span>
+          <br>
+          <input type=button value="Volver" class="btn btn-info"  style="float: left;" onClick="javascript:history.go(-1);">
+
+          <a href="{% url 'EliminarProyecto' proyectos.id %}" class="btn btn-danger">Eliminar</a>
+
+        </div>
+      </div>
+    
+      <!-- thumbnail image wrapped in a link -->
+    
+      <!-- lightbox container hidden with CSS -->
+      <div class="contenedorminiatura">
+        <a href="#img1" >
+            <img src="{{proyectos.Imagen1.url}}" class="miniatura">
+          </a>
+          <a href="#img2" >
+            <img src="{{proyectos.Imagen2.url}}" class="miniatura">
+          </a>
+          <a href="#img3" >
+            <img src="{{proyectos.Imagen3.url}}" class="miniatura">
+          </a>
+          <a href="#img4">
+            <img src="{{proyectos.Imagen4.url}}"  class="miniatura">
+          </a>
+      </div>
+      
+      <div class="proyectosDetalles">
+        
+          
+        <a href="#" class="lightbox" id="img1">
+            <span style="background-image: url('{{proyectos.Imagen1.url}}')"></span>
+        </a>
+    
+        <a href="#" class="lightbox" id="img2">
+            <span style="background-image: url('{{proyectos.Imagen2.url}}')"></span>
+        </a>
+    
+        <a href="#" class="lightbox" id="img3">
+            <span style="background-image: url('{{proyectos.Imagen3.url}}')"></span>
+        </a>
+    
+        <a href="#" class="lightbox" id="img4">
+            <span style='background-image: url("{{proyectos.Imagen4.url}}")''></span>
+        </a>
+      </div>
+</div>
+
+
+  
+ 
+
+<script>
+
+var $overlay = $('<div id="overlay"></div>');
+var $image = $("<img>");
+
+//An image to overlay
+$overlay.append($image);
+
+//Add overlay
+$("body").append($overlay);
+
+  //click the image and a scaled version of the full size image will appear
+  $("#photo-gallery a").click( function(event) {
+    event.preventDefault();
+    var imageLocation = $(this).attr("href");
+
+    //update overlay with the image linked in the link
+    $image.attr("src", imageLocation);
+
+    //show the overlay
+    $overlay.show();
+  } );
+
+  $("#overlay").click(function() {
+    $( "#overlay" ).hide();
+  });
+
+</script>
+{% endblock content %}

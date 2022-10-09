@@ -1,0 +1,53 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<form action="" method="post" enctype="multipart/form-data" class="formequipo">
+    {% csrf_token%}
+
+    {% for field in formulario %}     
+        <div class="mb-3">
+          <label  class="form-label">{{field.label}}</label>
+          {{field}}
+        </div>
+
+    {% endfor %}
+
+        <button type="submit" class="btn btn-success">Enviar</button>
+</form>
+
+
+<div class="Equipo">
+
+
+  {% for personas in equipo %}
+  <div class="persona" style="margin: 1%;">
+
+
+    <div class="card mb-3" id="personacard">
+      <a href="{% url 'EliminarPersona' personas.id %}" class="btn btn-danger">Eliminar</a>
+
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="{{personas.FotoPerfil.url}}" class="img-fluid rounded-start" id="personaimg" alt="...">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h3 class="card-title">{{personas.Role}}</h3>
+             <h5 class="card-title">{{personas.Nombre}} {{personas.Apellido}} </h5>
+            
+            <p  class="card-text" id="historialPersonaEquipo">{{personas.HistorialProfesional}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+  
+  </div>
+
+  {% endfor %}
+
+</div>
+{% endblock content %}

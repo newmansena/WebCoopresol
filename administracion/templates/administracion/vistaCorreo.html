@@ -1,0 +1,39 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<div class="contenedorvistaCorreo">
+
+ 
+  <form method="POST" action=""  enctype="multipart/form-data">
+    {% csrf_token%}
+    {% for field in formulario %}     
+    <div class="mb-3">
+        <label for="formFile" class="form-label">{{field.label}}</label>
+        {{field}}
+      </div>
+    
+      {% endfor %}
+    {% if CorreosData.Estado == 'Revisado' %}
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    {% endif %}
+    <br>
+  </form>
+
+
+<div class="col-md-6 p-4 ps-md-0">
+    <h5 class="mt-0">{{CorreosData.Nombre}}</h5>
+    <p>{{CorreosData.Apellido}}</p>
+     Asunto<h4>{{CorreosData.Asunto}}</h4>
+    <strong>Teléfono: </strong><span>{{CorreosData.Telefono}}</span>
+    <br>
+    <strong> Mensaje: </strong><span>{{CorreosData.Mensaje}}</span>
+    <br>
+     
+
+  </div>
+
+</div>
+{% endblock content %}

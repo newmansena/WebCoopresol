@@ -1,0 +1,75 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+<div class="contenedorUsuarios">
+
+
+  <!-- QUITADO PARA BORRAR CUADRO VERDE -->
+   <!-- <div class="registrar-contenedor" > -->
+    
+  <form method="POST" action="registroU"  id="formregistrarusuario">
+    <h1>Agregar Usuario</h1>
+      {% csrf_token%}
+      {% for field in formularioCcreacion %}
+      <div class="mb-3">
+            {{field}}
+          {% if field.label == 'Password' %}
+          <ul >
+            <li style="text-align:  left !important;">
+              Debe tener al menos 8 caracteres
+            </li>
+            <li style="text-align:  left !important;">
+              No debe contener el nombre de usuario
+            </li>
+            <li style="text-align:  left !important;">
+              Debe ser una combinación de letras y números
+            </li>
+          </ul>
+          {% endif %}
+      </div>
+      {% endfor %}
+      <!-- {{formularioCcreacion.as_p}} -->
+      <input type="submit"  id="rergistrarbuton" class="btn btn-primary" value="Agregar">
+  </form>
+  
+</div>
+
+  
+    <div class="row">
+      <h1 style="color:white ; text-align:center;"> Usuarios Existentes </h1>
+        {% for item in usuarios %} 
+        <div class="col-sm-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{item.username}}</h5>
+
+              <form action="editarusuario" method="post" enctype="multipart/form-data"  >
+                {% csrf_token%}
+                {% for field in formulario %}    
+                 
+                <div class="mb-3">
+                    {{field}}
+                </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-success">Guardar</button>
+                <a href="{%  url 'EliminarUsuario' item.id %}" class="btn btn-danger"  id="eliusuario">Eliminar</a>
+
+            </form>
+              
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+    </div>
+
+
+    <script>
+      
+      let = document.getElementById("id_password1").className = "form-control"
+      let = document.getElementById("id_password2").className = "form-control"
+      let = document.getElementById("id_password1").placeholder = "contraseña"
+      let = document.getElementById("id_password2").placeholder = "Confirmar contraseña"
+    </script>+
+    </div>
+{% endblock content %}
